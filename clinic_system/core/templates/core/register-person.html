@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar nova pessoa</title>
+</head>
+<body>
+
+    <div>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <h1>Cadastro de pessoa</h1>
+    <p>Preencha os campos abaixo para cadastrar uma nova pessoa no sistena</p>
+    <p>Informe se o cadastro refere-se a um médico ou a um atendente</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label for="name">Nome completo</label><br>
+            <input type="text" name="name" id="name">
+        </p>
+
+        <p>
+            <label for="birthday">Data de nascimento</label><br>
+            <input type="date" name="birthday" id="birthday">
+        </p>
+
+        <p>
+            <label for="cpf">CPF</label><br>
+            <input type="text" name="cpf" id="cpf">
+        </p>
+
+        <p>
+            <label for="cpf">Senha</label><br>
+            <input type="password" name="password" id="password">
+        </p>
+
+        <p>
+            <label for="sex">Sexo</label><br>
+            <select name="sex" id="sex">
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="contact">Contato</label><br>
+            <input type="text" name="contact" id="contact">
+        </p>
+
+        <p>
+            <label for="email">E-mail</label><br>
+            <input type="email" name="email" id="email">
+        </p>
+
+        <p>
+            <label for="salary">Salário</label><br>
+            <input type="number" step="0.01" min="0" name="salary" id="salary">
+        </p>
+
+        <p>
+            <label for="commission">Comissão (%)</label><br>
+            <input type="number" step="0.01" min="0" name="commission" id="commission">
+        </p>
+
+        <p>
+            <input type="checkbox" name="is_medical" id="is_medical">
+            <label for="is_medical">Cadastro de médico</label>
+        </p>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+    
+</body>
+</html>

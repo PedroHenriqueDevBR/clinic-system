@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="post" action="">
+        {% csrf_token %}
+
+            <label for="">Autorizada</label>
+            <input type="checkbox" name="is_authorized">
+
+            <label for="">Paciente</label>
+            <select name="paciente">
+                {% for paciente in pacientes %}
+                    <option value="{{paciente.id}}">{{paciente.name}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="">Médico</label>
+            <select name="disponibilidade_medic">
+                {% for d in disponibilidade %}
+                    <option value="{{d.id}}">{{d.medico.name}} // {{d.date}} // {{d.init_hour}} // {{d.end_hour}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="">Recepcionista</label>
+            <select name="recepcionista">
+                <option value="{{request.user.id}}">{{request.user}}</option>
+            </select>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+</body>
+</html>

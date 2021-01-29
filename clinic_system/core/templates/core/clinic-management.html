@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento das consultas</title>
+</head>
+<body>
+
+    <div>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <h1>Detalhes da consultas cadastradas</h1>
+    <p>Página para apresentar as consultas registradas e que estão aguardando atendimento médico</p>
+    <hr>
+        <a href="/dashboard/paciente">Cadastrar paciente</a>
+        <br>
+        <a href="{% url 'cadastro-consultas' %}">Cadastrar consulta</a>
+        <Br>
+        <a href="{% url 'cadastrar-planos' %}">Cadastrar planos</a>
+    <hr>
+
+    <h3>Agendamentos</h3>
+    {% for agendamento in agendamentos %}
+        <p>Paciente: {{agendamento.paciente.name}}</p>
+        <p>Médico: {{agendamento.disponibilidade_medic}}</p>
+        <p>Data: {{agendamento.disponibilidade_medic.date}}</p>
+        <p>Hora de início: {{agendamento.disponibilidade_medic.init_hour}}</p>
+        <p>Hora de término: {{agendamento.disponibilidade_medic.end_hour}}</p>
+        <p>Recepcionista: {{agendamento.recepcionista.name}}</p>
+        <p>Status: {{agendamento.status}}</p>
+        <a href="{% url 'confirmar-agendamento' agendamento.id %}">Confirmar</a>
+
+    {% endfor %}
+    <h3>consultas cadastradas (Em andamento)</h3>
+
+    <div>
+        {% if patients %}
+            <h3>Pacientes cadastrados</h3>
+            <ul>
+                {% for patient in patients %}
+                <li>
+                    Nome: {{ patient.name }} <br>
+                    data: {{ patient.birthday }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>Nenhum paciente cadastrado</h3>
+        {% endif %}
+    </div>
+
+</body>
+</html>
