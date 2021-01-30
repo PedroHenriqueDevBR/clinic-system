@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="post" action="">
+        {% csrf_token %}
+            <label for="">Data da consulta</label>
+            <input type="date" name="date">
+
+            <label for="">Hora início</label>
+            <input type="time" name="init_hour">
+
+            <label for="">Hora término</label>
+            <input type="time" name="end_hour">
+
+            <label for="">Médico</label>
+            <select name="medico">
+
+                <option value="{{request.user.id}}">{{request.user}}</option>
+
+            </select>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
