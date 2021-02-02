@@ -1,60 +1,70 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento das consultas</title>
-</head>
-<body>
+{% extends 'utils/base.html' %}}
+{% block main %}
 
-    <div>
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
-    <h1>Detalhes da consultas cadastradas</h1>
-    <p>Página para apresentar as consultas registradas e que estão aguardando atendimento médico</p>
-    <hr>
-        <a href="/dashboard/paciente">Cadastrar paciente</a>
-        <br>
-        <a href="{% url 'cadastro-consultas' %}">Cadastrar consulta</a>
-        <Br>
-        <a href="{% url 'cadastrar-planos' %}">Cadastrar planos</a>
-    <hr>
-
-    <h3>Agendamentos</h3>
-    {% for agendamento in agendamentos %}
-        <p>Paciente: {{agendamento.paciente.name}}</p>
-        <p>Médico: {{agendamento.disponibilidade_medic}}</p>
-        <p>Data: {{agendamento.disponibilidade_medic.date}}</p>
-        <p>Hora de início: {{agendamento.disponibilidade_medic.init_hour}}</p>
-        <p>Hora de término: {{agendamento.disponibilidade_medic.end_hour}}</p>
-        <p>Recepcionista: {{agendamento.recepcionista.name}}</p>
-        <p>Status: {{agendamento.status}}</p>
-        <a href="{% url 'confirmar-agendamento' agendamento.id %}">Confirmar</a>
-
-    {% endfor %}
-    <h3>consultas cadastradas (Em andamento)</h3>
-
-    <div>
-        {% if patients %}
-            <h3>Pacientes cadastrados</h3>
-            <ul>
-                {% for patient in patients %}
-                <li>
-                    Nome: {{ patient.name }} <br>
-                    data: {{ patient.birthday }}
-                </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <h3>Nenhum paciente cadastrado</h3>
-        {% endif %}
+<div id="clinic-management-page">
+    <div class="text-center pt-4">
+        <h1>Detalhes da consultas cadastradas</h1>
+        <p>Página para apresentar as consultas registradas e que estão aguardando atendimento médico</p>
     </div>
 
-</body>
-</html>
+    <div class="text-center px-5 bg-color-app">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/dashboard/paciente" class="btn primary-color-app white-text">Cadastrar paciente</a>
+            <a href="{% url 'cadastro-consultas' %}" class="btn primary-color-app white-text">Cadastrar consulta</a>
+            <a href="{% url 'cadastrar-planos' %}" class="btn primary-color-app white-text">Cadastrar planos</a>
+        </div>
+    </div>
+
+
+    <div class="d-flex justify-content-center">
+        <div class="container">
+
+            <div class="row mt-4">
+                <div class="col card">
+                    <p class="text-center text-uppercase fs-5 fw-bold pt-4">Agendamentos</p>
+                    <hr>
+                    {% if Agendamentos %}
+                    {% for agendamento in agendamentos %}
+                    <p>Paciente: {{agendamento.paciente.name}}</p>
+                    <p>Médico: {{agendamento.disponibilidade_medic}}</p>
+                    <p>Data: {{agendamento.disponibilidade_medic.date}}</p>
+                    <p>Hora de início: {{agendamento.disponibilidade_medic.init_hour}}</p>
+                    <p>Hora de término: {{agendamento.disponibilidade_medic.end_hour}}</p>
+                    <p>Recepcionista: {{agendamento.recepcionista.name}}</p>
+                    <p>Status: {{agendamento.status}}</p>
+                    <a href="{% url 'confirmar-agendamento' agendamento.id %}">Confirmar</a>
+        
+                    {% endfor %}
+                    {% else %}
+                    <p>Nenhuma consulta agendada</p>
+                    {% endif %}
+                </div>
+        
+                <div class="col card">
+                    <p class="text-center text-uppercase fs-5 fw-bold pt-4">Atendimentos realizados</p>
+                    <hr>
+                </div>
+        
+                <div class="col card">
+                    <p class="text-center text-uppercase fs-5 fw-bold pt-4">Pacientes cadastrados</p>
+                    <hr>
+                    {% if patients %}
+                    <ul>
+                        {% for patient in patients %}
+                        <li>
+                            Nome: {{ patient.name }} <br>
+                            data: {{ patient.birthday }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>Nenhum paciente cadastrado</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
