@@ -182,7 +182,8 @@ def cadastrar_horario(request):
     else:
         form = AgendaForm()
 
-    return render(request, 'core/cadastro-horario.html', {'form': form})
+    hours = MedicalSchedule.objects.filter(medico=request.user.person)
+    return render(request, 'core/cadastro-horario.html', {'form': form, 'hours': hours})
 
 @login_required(login_url='login')
 def confirmar_agendamento(request, pk):

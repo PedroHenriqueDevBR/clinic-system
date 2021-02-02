@@ -1,33 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{message}}</p>
-        {% endfor %}
-    {% endif %}
-    <form method="post" action="">
-        {% csrf_token %}
-            <label for="">Data da consulta</label>
-            <input type="date" name="date">
+{% extends 'utils/base.html' %}
+{% block title %}Registrar hoário de trabalho{% endblock %}
+{% block main %}
 
-            <label for="">Hora início</label>
-            <input type="time" name="init_hour">
+<div id="register-medical-hour">
 
-            <label for="">Hora término</label>
-            <input type="time" name="end_hour">
+    <div class="card rounded mx-5 my-5 px-5 py-5">
 
-            <label for="">Médico</label>
-            <select name="medico">
+        <div class="div py-4">
+            <a href="/dashboard" class="btn">Voltar</a>
+        </div>
 
-                <option value="{{request.user.id}}">{{request.user}}</option>
+        <div class="row">
+            <div class="col">
+                <h1>Cadastro de horário</h1>
+                <p>Preencha os campos abaixo para registrar um novo horário de atendimento</p>
+                <form method="post" action="">
+                    {% csrf_token %}
 
-            </select>
-        <button type="submit">Salvar</button>
-    </form>
-</body>
-</html>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="date" name="date" id="date" placeholder="Data da consulta">
+                        <label for="date">Data da consulta</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="time" name="init_hour" id="init_hour"
+                                    placeholder="Hora de início">
+                                <label for="init_hour">Hora início</label>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="time" name="end_hour" id="end_hour"
+                                    placeholder="Hora de término">
+                                <label for="end_hour">Hora término</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label for="medico">Médico</label>
+                    <select class="form-select" aria-label="Default select example" name="medico" id="medico">
+                        <option value="{{request.user.id}}" selected>{{request.user}}</option>
+                    </select>
+
+
+                    <button type="submit" class="btn primary-color-app text-white full-width mt-3">Salvar</button>
+                </form>
+            </div>
+
+            <div class="col">
+                <h1>Horários cadastrados</h1>
+                <p>Listagem dos horários já cadaastrados no sistema</p>
+
+                {% if hours %}
+                <ul class="list-group list-group-flush">
+                    {% for hour in hours %}
+                    <li class="list-group-item">
+                        <p>dia {{ hour.date }} de <b>{{ hour.init_hour }}</b> horas às <b>{{ hour.end_hour }}</b> horas</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>Nenhum horário cadastrados até o momento</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

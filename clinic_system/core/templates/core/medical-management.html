@@ -1,47 +1,40 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento médico</title>
-</head>
-<body>
-    <div>
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
+{% extends 'utils/base.html' %}}
+{% block main %}
+
+<div id="medical-management-page">
+
+    <div class="text-center pt-4">
+        <h1>Gerenciamento médico</h1>
+        <p>Página de gerenciamento para os médicos</p>
+    </div>
+
+    <div class="text-center px-5 bg-color-app">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{% url 'cadastrar-horario' %}" class="btn primary-color-app white-text">Cadastrar horário</a>
+        </div>
+    </div>
+
+    <div class="container card rounded mt-3 px-4 py-5 text-center">
+        {% if agendamentos %}
+            <h3>Agendamentos confirmados</h3>
+            {% for agendamento in agendamentos %}
+                <p>Paciente: {{agendamento.paciente.name}}</p>
+                <p>Médico: {{agendamento.disponibilidade_medic}}</p>
+                <p>Data: {{agendamento.disponibilidade_medic.date}}</p>
+                <p>Hora de início: {{agendamento.disponibilidade_medic.init_hour}}</p>
+                <p>Hora de término: {{agendamento.disponibilidade_medic.end_hour}}</p>
+                <p>Recepcionista: {{agendamento.recepcionista.name}}</p>
+                <p>Status: {{agendamento.status}}</p>
+                <a href="{% url 'criar-consulta' agendamento.id %}">Criar consulta</a>
+    
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma consulta agendada</p>
         {% endif %}
     </div>
-    <h1>Gerenciamento médico</h1>
-    <p>Página principal dos médicos, onde serão lisatados todas as consultas pendentes</p>
-    <a href="{% url 'cadastrar-horario' %}">Cadastrar horário</a>
-    {% if horarios %}
-        <h3>Horarios cadastrados para você</h3>
-        {% for horario in horarios %}
-            {{horario.date}}
-            {{horario.init_hour}}
-            {{horario.end_hour}}
-        {% endfor %}
-    {% else %}
-        <h3>Sem horários cadastrados</h3>
-    {% endif %}
 
-    {% if agendamentos %}
-        <h3>Agendamentos confirmados</h3>
-        {% for agendamento in agendamentos %}
-            <p>Paciente: {{agendamento.paciente.name}}</p>
-            <p>Médico: {{agendamento.disponibilidade_medic}}</p>
-            <p>Data: {{agendamento.disponibilidade_medic.date}}</p>
-            <p>Hora de início: {{agendamento.disponibilidade_medic.init_hour}}</p>
-            <p>Hora de término: {{agendamento.disponibilidade_medic.end_hour}}</p>
-            <p>Recepcionista: {{agendamento.recepcionista.name}}</p>
-            <p>Status: {{agendamento.status}}</p>
-            <a href="{% url 'criar-consulta' agendamento.id %}">Criar consulta</a>
+    
+</div>
 
-        {% endfor %}
-    {% endif %}
-</body>
-</html>
+
+{% endblock %}
