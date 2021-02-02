@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acesso ao sistema</title>
-</head>
-<body>
+{% extends 'utils/base.html' %}
+{% block title %} Acesso ao sistema {% endblock %}
 
+{% block main %}
     <h1>Login</h1>
     <p>Preencha os campos abaixo com as suas credenciais</p>
 
@@ -33,6 +28,4 @@
         <button type="submit">Entrar</button>
     </form>
     <a href="/cadastrar">Cadastrar</a>
-    
-</body>
-</html>
+{% endblock %}
