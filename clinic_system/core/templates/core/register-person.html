@@ -1,83 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar nova pessoa</title>
-</head>
-<body>
+{% extends 'utils/base.html' %}
+{% block title %}Cadastrar perfil{% endblock %}
+{% block main %}
 
-    <div>
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+<div id="register-page" class="primary-color-app px-5 py-5">
+    <div class="card px-5 py-5">
+
+        <h1>Cadastrar novo perfil</h1>
+        <p>Preencha os campos abaixo para cadastrar um novo perfil no sistema</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" name="name" id="name" placeholder="Nome completo">
+                <label for="name">Nome completo</label>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="date" name="birthday" id="birthday"
+                            placeholder="Data de nascimento">
+                        <label for="birthday">Data de nascimento</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="cpf" id="cpf" placeholder="CPF válido">
+                        <label for="cpf">CPF</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="password" name="password" id="password"
+                            placeholder="Senha de acesso ao sistema">
+                        <label for="cpf">Senha</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <select class="form-select" aria-label="Default select example" name="sex" id="sex">
+                        <option selected disabled>Sexo</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="contact" id="contact" placeholder="Contato">
+                        <label for="contact">Contato</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="email" name="email" id="email" placeholder="E-mail">
+                        <label for="email">E-mail</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="number" step="0.01" min="0" name="salary" id="salary"
+                            placeholder="Salário">
+                        <label for="salary">Salário</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="number" step="0.01" min="0" name="commission" id="commission" placeholder="Comissão">
+                        <label for="commission">Comissão (%)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <hr>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="is_medical" name="is_medical">
+                        <label class="form-check-label" for="is_medical">
+                            Perfil de médico
+                        </label>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+            <button type="submit" class="btn primary-color-app white-text full-width">Cadastrar</button>
+        </form>
     </div>
+</div>
 
-    <h1>Cadastro de pessoa</h1>
-    <p>Preencha os campos abaixo para cadastrar uma nova pessoa no sistena</p>
-    <p>Informe se o cadastro refere-se a um médico ou a um atendente</p>
-
-    <form method="post">
-        {% csrf_token %}
-        <p>
-            <label for="name">Nome completo</label><br>
-            <input type="text" name="name" id="name">
-        </p>
-
-        <p>
-            <label for="birthday">Data de nascimento</label><br>
-            <input type="date" name="birthday" id="birthday">
-        </p>
-
-        <p>
-            <label for="cpf">CPF</label><br>
-            <input type="text" name="cpf" id="cpf">
-        </p>
-
-        <p>
-            <label for="cpf">Senha</label><br>
-            <input type="password" name="password" id="password">
-        </p>
-
-        <p>
-            <label for="sex">Sexo</label><br>
-            <select name="sex" id="sex">
-                <option value="M">Masculino</option>
-                <option value="F">Feminino</option>
-            </select>
-        </p>
-
-        <p>
-            <label for="contact">Contato</label><br>
-            <input type="text" name="contact" id="contact">
-        </p>
-
-        <p>
-            <label for="email">E-mail</label><br>
-            <input type="email" name="email" id="email">
-        </p>
-
-        <p>
-            <label for="salary">Salário</label><br>
-            <input type="number" step="0.01" min="0" name="salary" id="salary">
-        </p>
-
-        <p>
-            <label for="commission">Comissão (%)</label><br>
-            <input type="number" step="0.01" min="0" name="commission" id="commission">
-        </p>
-
-        <p>
-            <input type="checkbox" name="is_medical" id="is_medical">
-            <label for="is_medical">Cadastro de médico</label>
-        </p>
-
-        <button type="submit">Cadastrar</button>
-    </form>
-    
-</body>
-</html>
+{% endblock %}

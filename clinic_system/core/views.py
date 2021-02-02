@@ -71,7 +71,6 @@ def person_register(request):
                     return redirect('login-page')
                 else:
                     messages.add_message(request, messages.INFO, 'O CPF informado já esta cadastrado')
-                    print('CPF já cadastrado')
             else:
                 messages.add_message(request, messages.INFO, 'O e-mail informado já esta cadastrado')
         except:
@@ -201,6 +200,3 @@ def criar_consulta(request, pk):
         form = ConsultaForm()
 
     return render(request, 'core/criar-consulta-medico.html', {'form':form})
-
-
-
