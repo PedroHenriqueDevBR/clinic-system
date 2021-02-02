@@ -20,9 +20,8 @@
         <div class="container">
 
             <div class="row mt-4">
-                <div class="col card">
+                <div class="col card px-0">
                     <p class="text-center text-uppercase fs-5 fw-bold pt-4">Agendamentos</p>
-                    <hr>
                     {% if Agendamentos %}
                     {% for agendamento in agendamentos %}
                     <p>Paciente: {{agendamento.paciente.name}}</p>
@@ -33,32 +32,34 @@
                     <p>Recepcionista: {{agendamento.recepcionista.name}}</p>
                     <p>Status: {{agendamento.status}}</p>
                     <a href="{% url 'confirmar-agendamento' agendamento.id %}">Confirmar</a>
-        
+
                     {% endfor %}
                     {% else %}
-                    <p>Nenhuma consulta agendada</p>
+                    <div class="px-3">
+                        <p>Nenhuma consulta agendada</p>
+                    </div>
                     {% endif %}
                 </div>
-        
-                <div class="col card">
+
+                <div class="col card px-0">
                     <p class="text-center text-uppercase fs-5 fw-bold pt-4">Atendimentos realizados</p>
-                    <hr>
                 </div>
-        
-                <div class="col card">
+
+                <div class="col card px-0">
                     <p class="text-center text-uppercase fs-5 fw-bold pt-4">Pacientes cadastrados</p>
-                    <hr>
                     {% if patients %}
-                    <ul>
-                        {% for patient in patients %}
-                        <li>
-                            Nome: {{ patient.name }} <br>
-                            data: {{ patient.birthday }}
-                        </li>
-                        {% endfor %}
+                    <ul class="list-group list-group-flush">
                     </ul>
+                    {% for patient in patients %}
+                    <li class="list-group-item">
+                        {{ patient.name }} <br>
+                        CPF: {{ patient.cpf }}
+                    </li>
+                    {% endfor %}
                     {% else %}
-                    <p>Nenhum paciente cadastrado</p>
+                    <div class="px-3">
+                        <p>Nenhum paciente cadastrado</p>
+                    </div>
                     {% endif %}
                 </div>
             </div>
