@@ -151,8 +151,10 @@ def cadastrar_planos(request):
             form.save()
     else:
         form = PlanosForms()
+    
+    plans = MecialPlan.objects.all()
 
-    return render(request, 'core/cadastrar-planos.html', {'form':form})
+    return render(request, 'core/cadastrar-planos.html', {'form':form, 'plans': plans})
 
 @login_required(login_url='login')
 def cadastrar_consulta(request):
