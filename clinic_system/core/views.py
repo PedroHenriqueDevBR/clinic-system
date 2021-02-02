@@ -17,7 +17,7 @@ def login_page(request):
         user = authenticate(request, username=username, password=password)
 
         if user is None:
-            print('Usuário não localizado')
+            messages.add_message(request, messages.INFO, 'Usuário não cadastrado no sistema')
         else:
             login(request, user)
             if request.user.person.is_medical:

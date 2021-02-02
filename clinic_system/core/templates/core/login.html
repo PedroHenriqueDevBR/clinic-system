@@ -2,30 +2,29 @@
 {% block title %} Acesso ao sistema {% endblock %}
 
 {% block main %}
-    <h1>Login</h1>
-    <p>Preencha os campos abaixo com as suas credenciais</p>
 
-    <div>
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+<div id="login-page">
+    <div class="card rounded px-5 py-5 shadow-lg">
+        <h1>Login</h1>
+        <p>Preencha os campos abaixo com as suas credenciais</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" name="username" id="username" placeholder="Login">
+                <label for="username">Login</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input class="form-control" type="password" name="password" id="password" placeholder="Senha">
+                <label for="password">Senha</label>
+            </div>
+
+            <button type="submit" class="btn primary-color-app white-text full-width">Entrar</button>
+        </form>
+        <a href="/cadastrar" class="btn btn-smal">Cadastrar</a>
     </div>
+</div>
 
-    <form method="post">
-        {% csrf_token %}
-        <p>
-            <label for="username">Login</label><br>
-            <input type="text" name="username" id="username">
-        </p>
-        <p>
-            <label for="password">Senha</label><br>
-            <input type="password" name="password" id="password">
-        </p>
-        <button type="submit">Entrar</button>
-    </form>
-    <a href="/cadastrar">Cadastrar</a>
 {% endblock %}
