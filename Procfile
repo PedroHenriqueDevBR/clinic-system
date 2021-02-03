@@ -1,1 +1,1 @@
-web: gunicorn clinic_system.clinic_system.wsgi
+web: gunicorn clinic_system.wsgi
