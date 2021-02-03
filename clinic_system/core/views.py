@@ -197,7 +197,7 @@ def criar_consulta(request, pk):
     if str(request.method == 'POST'):
         form = ConsultaForm(request.POST or None)
         if form.is_valid():
-            messages.success(request, 'Consulta finalizada')
+            messages.add_message(request, 'Consulta finalizada')
            # form.save()
     else:
         form = ConsultaForm()
